@@ -11,16 +11,13 @@ public class MyListImpl<T> implements MyList<T> {
     }
 
     public void add(MyNode newNode) {
-        if (size == 0) {
-            newNode.setIndex(0);
-            this.node = newNode;
-        } else {
+        if (size > 0) {
             MyNode prevNode = this.node;
-            newNode.setIndex(size);
             newNode.setPrev(prevNode);
             prevNode.setNext(newNode);
-            this.node = newNode;
         }
+        newNode.setIndex(size);
+        this.node = newNode;
         size++;
     }
 
@@ -55,10 +52,7 @@ public class MyListImpl<T> implements MyList<T> {
     }
 
     public void remove(int index) {
-        if (index < 0 || index > (size - 1)) {
-            System.out.println("incorrect");
-            return;
-        } else {
+        if (index > 0 || index < (size - 1)) {
 
             MyNode nodeToRemove = get(index);
 
