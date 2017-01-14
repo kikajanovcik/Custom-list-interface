@@ -52,7 +52,7 @@ public class MyListImpl<T> implements MyList<T> {
     }
 
     public void remove(int index) {
-        if (index > 0 || index < (size - 1)) {
+        if (index > 0 && index < (size - 1)) {
 
             MyNode nodeToRemove = get(index);
 
