@@ -3,13 +3,15 @@ public interface MyList<T> {
 
     int size();
 
-    void add(MyNode node);
+    void add(T elem);
 
-    MyNode get(int index);
+    MyNode<T> get(int index);
 
     boolean isEmpty();
 
     void remove(int index);
 
-    boolean contains(MyNode node);
+    boolean contains(T elem);
+
+    int indexOf(T elem);
 }

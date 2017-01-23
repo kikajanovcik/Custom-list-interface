@@ -2,11 +2,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        MyListImpl<MyNode> list = new MyListImpl<MyNode>();
-        MyNode zeroIndexNode = new MyNode();
-        MyNode oneIndexNode = new MyNode();
-        MyNode twoIndexNode = new MyNode();
-        MyNode threeIndexNode = new MyNode();
+        MyList<String> list = new MyListImpl<String>();
+        String zeroIndexNode = "index zero";
+        String oneIndexNode = "index one";
+        String twoIndexNode = "index two";
+        String threeIndexNode = "index three";
 
         System.out.println("This is an empty list");
         System.out.println("List size: " + list.size());
@@ -19,16 +19,15 @@ public class Main {
         list.add(threeIndexNode);
         System.out.println("Is the list empty? " + list.isEmpty() + ", it has size of: " + list.size());
 
-        System.out.println("\nThis is 'twoIndexNode' " + twoIndexNode + " with index of " + twoIndexNode.getIndex());
-        System.out.print("This node we got by calling list.get(2): ");
-        System.out.println(list.get(2) + " with index of " + list.get(2).getIndex());
-
+        System.out.println("\nThis is node with value: " + list.get(1).getValue());
+        System.out.println("Now we remove node at index 1 with list.remove(1)");
         list.remove(1);
-        System.out.println("\nThis is threeIndexNode's new index after removing one node: " + threeIndexNode.getIndex());
-        list.remove(1);
-        System.out.println("This is threeIndexNode's new index after removing another node: " + threeIndexNode.getIndex());
+        System.out.println("New value of node on index one is: " + list.get(1).getValue());
 
-        System.out.println("\nDoes list contain a oneIndexNode? (should be false) " + list.contains(oneIndexNode));
-        System.out.println("Does list contain a threeIndexNode? (should be true) " + list.contains(threeIndexNode));
+        System.out.println("should print true: " + list.contains("index zero"));
+        System.out.println("should print false: " + list.contains("index one"));
+
+        System.out.println("should print 1: " + list.indexOf("index two"));
+        System.out.println("should print -1: " + list.indexOf("index one"));
     }
 }
