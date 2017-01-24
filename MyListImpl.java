@@ -66,9 +66,12 @@ public class MyListImpl<T> implements MyList<T> {
 
         while (myNode.getNext() != null) {
             myNode = myNode.getNext();
-            if (newNode.equals(myNode) || newNode.equals(firstNode)) {
+            if (newNode.equals(myNode)) {
                 nodeIsPresent = true;
             }
+        }
+        if (newNode.equals(firstNode)){
+            nodeIsPresent = true;
         }
         return nodeIsPresent;
     }
@@ -102,8 +105,7 @@ public class MyListImpl<T> implements MyList<T> {
     // reverse order
     // filtering if int by number?
     // sort if String by alphabet?
-    // show duplicates in a new list 
-    // boolean containsDuplicates
+    // show duplicates & boolean containsDuplicates
     // count occurencies of T elem
     // return list [start, end]
 }
