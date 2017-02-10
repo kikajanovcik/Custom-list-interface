@@ -77,19 +77,22 @@ public class MyListImpl<T> implements MyList<T> {
     }
 
     public int indexOf(T elem) {
-        int index = 0;
-        MyNode<T> myNode = firstNode;
 
-        for(int i = 0; i < size; i++) {
-            if (!(myNode.getValue().equals(elem))) {
-                index++;
-                myNode = myNode.getNext();
+        if (contains(elem)) {
+            int index = 0;
+            MyNode<T> myNode = firstNode;
+
+            for (int i = 0; i < size; i++) {
+                if (!(myNode.getValue().equals(elem))) {
+                    index++;
+                    myNode = myNode.getNext();
+                }
             }
+            return index;
+        } else {
+            //if elem not in a list, return -1
+            return -1;
         }
-        //if index is out of range, set to -1
-        if (index >= size || index < 0) { index = -1; }
-
-        return index;
     }
 
     public int countRepetition(T elem) {
@@ -122,7 +125,7 @@ public class MyListImpl<T> implements MyList<T> {
 
                 boolean nodeHasADuplicate = count >= 2;
                 boolean nodeHasNotBeenChecked = !(duplicates.contains(myNode.getValue()));
-                
+
                 if (nodeHasADuplicate && nodeHasNotBeenChecked) {
                     duplicates.add(myNode.getValue());
                 }
