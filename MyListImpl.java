@@ -43,8 +43,9 @@ public class MyListImpl<T> implements MyList<T> {
 
     public void remove(int index) {
         if (index >= 0 && index < size) {
-
+            //remove node's value
             get(index).setValue(null);
+
             // if node to be removed has a previous node and a node afterwards, fill the gap
             if (hasPrevious(index) && hasNext(index)) {
                 MyNode<T> prevNode = get(index - 1);
@@ -65,14 +66,11 @@ public class MyListImpl<T> implements MyList<T> {
             MyNode<T> newNode = new MyNode<T>(elem);
             MyNode<T> myNode = firstNode;
 
-            while (myNode.getNext() != null) {
-                myNode = myNode.getNext();
+            while (myNode != null) {
                 if (newNode.equals(myNode)) {
                     return true;
                 }
-            }
-            if (newNode.equals(firstNode)) {
-                return true;
+                myNode = myNode.getNext();
             }
         }
         return false;
@@ -85,12 +83,11 @@ public class MyListImpl<T> implements MyList<T> {
         for(int i = 0; i < size; i++) {
             if (!(myNode.getValue().equals(elem))) {
                 index++;
-                if (myNode.getNext() != null) {
-                    myNode = myNode.getNext();
-                }
+                myNode = myNode.getNext();
             }
         }
-        if (index == size ) { index = -1; }
+        //if index is out of range, set to -1
+        if (index >= size || index < 0) { index = -1; }
 
         return index;
     }
@@ -101,16 +98,12 @@ public class MyListImpl<T> implements MyList<T> {
         MyNode<T> node = new MyNode<T>(elem);
         MyNode<T> myNode = firstNode;
 
-        while (myNode.getNext() != null) {
-            myNode = myNode.getNext();
+        while (myNode != null) {
             if (node.equals(myNode)) {
                 count++;
             }
+            myNode = myNode.getNext();
         }
-        if (node.equals(firstNode)) {
-            count++;
-        }
-
         return count;
     }
 
@@ -120,21 +113,20 @@ public class MyListImpl<T> implements MyList<T> {
 
     public MyListImpl<T> listDuplicates() {
         MyListImpl<T> duplicates = new MyListImpl<T>();
-        if(size > 0) {
+
+        if( size > 0 ) {
             MyNode<T> myNode = firstNode;
 
-            int count = countRepetition(firstNode.getValue());
-            if (count >= 2) {
-               duplicates.add(firstNode.getValue());
-            }
+            while (myNode != null) {
+                int count = countRepetition(myNode.getValue());
 
-            while (myNode.getNext() != null) {
-                myNode = myNode.getNext();
-                count = countRepetition(myNode.getValue());
-
-                if (count >= 2 && !(duplicates.contains(myNode.getValue()))) {
+                boolean nodeHasADuplicate = count >= 2;
+                boolean nodeHasNotBeenChecked = !(duplicates.contains(myNode.getValue()));
+                
+                if (nodeHasADuplicate && nodeHasNotBeenChecked) {
                     duplicates.add(myNode.getValue());
                 }
+                myNode = myNode.getNext();
             }
         }
         return duplicates;
