@@ -83,16 +83,15 @@ public class MyListImpl<T> implements MyList<T> {
             MyNode<T> myNode = firstNode;
 
             for (int i = 0; i < size; i++) {
-                if (!(myNode.getValue().equals(elem))) {
+                while (!(myNode.getValue().equals(elem))) {
                     index++;
                     myNode = myNode.getNext();
                 }
             }
             return index;
-        } else {
-            //if elem not in a list, return -1
-            return -1;
         }
+        //if elem not in a list, return -1
+        return -1;        
     }
 
     public int countRepetition(T elem) {
@@ -147,6 +146,5 @@ public class MyListImpl<T> implements MyList<T> {
     // reverse order
     // filtering if int by number?
     // sort if String by alphabet?
-    // show duplicates & boolean containsDuplicates
     // return list [start, end]
 }
