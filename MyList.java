@@ -14,4 +14,10 @@ public interface MyList<T> {
     boolean contains(T elem);
 
     int indexOf(T elem);
+
+    int countRepetition(T elem);
+
+    boolean hasDuplicates();
+
+    MyListImpl<T> listDuplicates();
 }

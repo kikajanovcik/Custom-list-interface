@@ -1,3 +1,4 @@
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -88,8 +89,7 @@ public class MyListImplTest {
         Assert.assertEquals(list.contains("index zero"), true);
 
         list.remove(0);
-        //TODO
-        //Assert.assertEquals(list.contains("index zero"), false);
+        Assert.assertEquals(list.contains("index zero"), false);
     }
 
     @Test
@@ -106,5 +106,68 @@ public class MyListImplTest {
         list.remove(0);
         Assert.assertEquals(list.indexOf("index zero"), -1);
         Assert.assertEquals(list.indexOf("index one"), 0);
+    }
+
+    @Test
+    public void testCountRepetition() throws Exception {
+        MyList<String> list = new MyListImpl<String>();
+
+        list.add(zeroIndexNode);
+        list.add(oneIndexNode);
+        list.add(oneIndexNode);
+        list.add(oneIndexNode);
+
+        Assert.assertEquals(list.countRepetition("index one"), 3);
+        Assert.assertEquals(list.countRepetition("index zero"), 1);
+        Assert.assertEquals(list.countRepetition("index lala"), 0);
+
+        list.remove(0);
+        Assert.assertEquals(list.countRepetition("index zero"), 0);
+
+        list.remove(0);
+        Assert.assertEquals(list.countRepetition("index one"), 2);
+    }
+
+    @Test
+    public void testHasDuplicates() throws Exception {
+        MyList<String> list = new MyListImpl<String>();
+
+        Assert.assertEquals(list.hasDuplicates(), false);
+
+        list.add(zeroIndexNode);
+        list.add(oneIndexNode);
+        list.add(oneIndexNode);
+
+        Assert.assertEquals(list.hasDuplicates(), true);
+        list.remove(1);
+        Assert.assertEquals(list.hasDuplicates(), false);
+    }
+
+    @Test
+    public void testListDuplicates() throws Exception {
+        MyList<String> list = new MyListImpl<String>();
+
+        list.add(zeroIndexNode);
+        list.add(oneIndexNode);
+        list.add(oneIndexNode);
+
+        MyList<String> duplicates = list.listDuplicates();
+
+        Assert.assertEquals(duplicates.size(), 1);
+        Assert.assertEquals(duplicates.get(0).getValue(), "index one");
+
+        list.add(zeroIndexNode);
+        duplicates = list.listDuplicates();
+
+        Assert.assertEquals(duplicates.size(), 2);
+        Assert.assertEquals(duplicates.get(0).getValue(), "index zero");
+        Assert.assertEquals(duplicates.get(1).getValue(), "index one");
+
+        list.remove(0);
+        list.remove(1);
+        duplicates = list.listDuplicates();
+
+        Assert.assertEquals(duplicates.size(), 0);
+        Assert.assertEquals(duplicates.get(0), null);
     }
 }
