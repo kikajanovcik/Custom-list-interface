@@ -115,7 +115,6 @@ public class MyListImpl<T> implements MyList<T> {
     }
 
     public boolean hasDuplicates() {
-        MyListImpl<T> duplicates = listDuplicates();
         return listDuplicates().size() > 0;
     }
 
